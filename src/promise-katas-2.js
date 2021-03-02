@@ -62,22 +62,9 @@ const joke = () => {
  
     return Promise.all([question, answer])
     .then(c => { 
-        //const first = c[0];
-        //const last = c[1];
-
         return { question: c[0], answer: c[1] } 
     });
 };
-
-/*const joke = () => {
-    const questions = fetch("jokes", "question")
-    const answers = fetch("jokes")
-    return Promise.all([questions, answers]).then((values) => {
-        const q = values[0]
-        const a = values[1]
-        return { question: q.joke, answer: a.answer }
-    });
-};*/
 
 module.exports = {
     food,
