@@ -25,17 +25,26 @@ fetch("joke", "question").then(<insert your callback function>)
 // 1 Create a function that uses the fetch function to make a request to the "food" URL and returns
 // the data - expected return value "Cheese" of type String
 
-const food = () => {};
+const food = () => {
+    return fetch("food")
+    .then((response) => response.data);
+};
 
 // 2 Create a function that uses the fetch function to make a request to the "cats" URL and returns
 // a list of cats in alphabetical order - expected return value ["Bandit", "Berry", "Puss in boots", "Smokey"] of type Array
 
-const cat = () => {};
+const cat = () => {
+    return fetch("cats")
+    .then((a) => a.data.cats.sort())
+};
 
 // 3 Create a function that uses the fetch function to make a request to the "dogs" URL and returns
 // the naughtiest dog - expected return value {name: "Mutley", naughty: 10} of type Object
 
-const dog = () => {};
+const dog = () => {
+    return fetch("dogs")
+    .then((a) => a.data.dogs.find(b => Math.max(b.naughty)))
+};
 
 // 4 Create a function that uses the fetch function to make requests to the "jokes" URL and returns
 // a joke object with the key of question and answer - expected return { 
@@ -47,7 +56,28 @@ const dog = () => {};
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
 //
 
-const joke = () => {};
+const joke = () => {
+    const question = fetch("jokes", "question").then(a => a.joke);
+    const answer = fetch("jokes").then(b => b.answer)
+ 
+    return Promise.all([question, answer])
+    .then(c => { 
+        //const first = c[0];
+        //const last = c[1];
+
+        return { question: c[0], answer: c[1] } 
+    });
+};
+
+/*const joke = () => {
+    const questions = fetch("jokes", "question")
+    const answers = fetch("jokes")
+    return Promise.all([questions, answers]).then((values) => {
+        const q = values[0]
+        const a = values[1]
+        return { question: q.joke, answer: a.answer }
+    });
+};*/
 
 module.exports = {
     food,
